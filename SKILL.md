@@ -11,6 +11,13 @@ You are a cartographer of digital products. Your job is to survey terrain — co
 
 Before any work, ask the user three questions if they haven't already specified them. Don't proceed until all three are answered.
 
+**Prefer the structured question UI when your harness has one.** If a multiple-choice question tool is available — `AskUserQuestion` in Claude Code, `mcp__conductor__AskUserQuestion` in Conductor, or your harness's equivalent — use it to ask the **Input source** and **Output format** questions, which have fixed option sets, and ask both in a **single call** (the tool batches questions). This renders selectable cards instead of making the user type. Do **not** add an "Other" / "Something else" option — the harness appends free-form input automatically. Leave **Target** as a plain-text question — it's a path, URL, or description, not a choice — and **ask it first, in its own message, before showing the cards** (a pending card call holds the turn open for card answers, so a Target question fired alongside it gets buried); skip any question the user already answered in their request. If no such tool is available, fall back to asking all three in prose (see [Initial response](#initial-response)).
+
+**Resolve free-form card answers by rule, don't re-ask.** The harness auto-appends a free-form "Other" field to every card question and you can't disable it. Because **Target** is already captured first (in its own turn), any free-form text on the two cards isn't a misplaced target — so resolve it deterministically:
+
+- Free-form answer to **Input source** (including "not sure") → treat as `Pick for me`: you choose the source based on what's available (repo access, a live URL, docs).
+- Free-form answer to **Where to render** → default to `HTML` — it has no dependencies and always works.
+
 1. **Target.** What flow are we mapping?
    - A codebase path (e.g. `apps/web-dashboard/src/routes/sign-up/`)
    - A URL (e.g. `https://app.acme.com`)
@@ -170,7 +177,22 @@ The test for any sentence: **does it tell the user something the diagram doesn't
 
 ## Initial response
 
-When this skill is invoked without a specific flow named, respond only with:
+When this skill is invoked without a specific flow named, get all three answers before surveying — **Target first, then source + render.**
+
+**If a structured question tool is available** (see [Confirm intent before surveying](#confirm-intent-before-surveying)), do it in this order:
+
+1. **Ask Target first, in its own turn.** If the user hasn't already named the flow, ask **What flow?** (codebase path, URL, or description) as a plain message and end your turn — let them answer before anything else. Don't bundle it into the same turn as the cards; the cards take focus and the free-form answer gets lost. If the target was already given in the invocation, skip to step 2.
+2. **Then ask source + render as cards** — the two fixed-option questions, batched in one call:
+   - **Input source?** — options: `Repo search (if you have access to the codebase)`, `Computer-use (an AI agent will go through the flow like a human)`, `Docs (when the flow lives in written documentation, e.g. an API)`, `Pick for me`
+   - **Where to render?** — options: `FigJam`, `HTML file`
+
+Cards have no per-option description field, so each option string carries its own hint in parentheses. Keep them: they're the only place the user learns what each source means. `Pick for me` is deliberate — it signals that *the agent* chooses the source, not the user.
+
+**Two different URLs, captured at different moments — don't conflate them:**
+- The **Target URL** (the product/page to survey) arrives via the *What flow?* question in step 1. This is the only URL needed when the source is computer-use.
+- The **FigJam file URL** (where to render) is *not* a card option — a card can't capture a pasted URL, so picking `FigJam` only tells you the target, not the destination file. If the user picks `FigJam` and hasn't already given a file URL, ask for it in a short prose follow-up after the card returns, before rendering.
+
+**Otherwise**, ask all three in prose:
 
 > Ready to map. Three quick questions:
 > 1. **What flow?** Codebase path, URL, or description.
