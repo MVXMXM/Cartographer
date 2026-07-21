@@ -141,6 +141,33 @@ Load these as needed:
 - **Always timestamp the title.** Format: `Flow Name (MM.DD.YYYY)` using today's date in the user's locale.
 - **Render-and-verify.** After writing to FigJam, call `get_screenshot` on the page and check for clipped text, overlapping nodes, or misaligned connectors. Fix in place rather than redrawing.
 
+## Closing response
+
+When the map is rendered, the diagram is the deliverable — your message is just a signpost to it. Keep it short. The user built this map to look at it, not to read a recap of it.
+
+### Required floor (always include)
+
+1. **A one-click way to open the artifact — lead with this.**
+   - **FigJam** — the file/page URL as a clickable Markdown link, e.g. `[Open in FigJam](<url>)`. If you can deep-link to the specific page or node, do.
+   - **HTML** — the written file path as an openable link, e.g. `[Open the diagram](file:///abs/path/flow.html)` (or the plain absolute path if a link won't render). Say where it was written.
+2. **If the survey used computer-use (Yutori Browse), also link the browsing task** so the user can review screenshots and the session trace. Surface whatever review reference the run exposes — a session/review URL from the task result, or the `task_id` if that's all there is. One task per line when there were several (happy path, each branch).
+
+### Recommended (include when it adds signal)
+
+- **A one-line summary of the flow** you mapped — what journey, at what altitude (e.g. "Guest checkout, 9 steps, branches on payment failure and address validation").
+- **Genuinely notable findings** — a surprising branch, a dead end, an undocumented gate, a mismatch between docs and actual behavior. Only things a viewer wouldn't infer just by reading the diagram.
+- **Drill-down / next-step offers** — e.g. "Say the word and I'll expand the 'Payment setup (5 steps)' node into its own map."
+
+### Suppress (do not narrate unless asked)
+
+- The rendering process or tool calls ("I called `use_figma`, then created 12 nodes, then…").
+- The visual system (color = who, shape = what) — it's self-evident from the diagram and its legend.
+- A node-by-node walkthrough of the flow. The diagram *is* the walkthrough. Restating each step in prose is the redundancy to avoid.
+- Verification steps you performed (screenshot checks, overlap fixes) — just deliver the corrected result.
+- The diagram title. It's baked into the artifact; only mention it if it comes up naturally in conversation.
+
+The test for any sentence: **does it tell the user something the diagram doesn't already show?** If not, cut it.
+
 ## Initial response
 
 When this skill is invoked without a specific flow named, respond only with:
