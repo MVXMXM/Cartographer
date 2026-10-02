@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Cartographer Mapping Loop Flow (10.02.2026)</title>
+<style>
+:root {
+  --human: #C2E5FF;
+  --ai: #DCCCFF;
+  --system: #D9D9D9;
+  --positive: #CDF4D3;
+  --negative: #FFCDC2;
+  --ink: #1E1E1E;
+  --note: #B3B3B3;
+  --connector: #757575;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 24px;
+  background: #f7f7f5;
+  color: var(--ink);
+  font-family: -apple-system, system-ui, sans-serif;
+}
+.diagram {
+  position: relative;
+  width: 1457px;
+  height: 1402px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+.title {
+  position: absolute;
+  left: 48px;
+  top: 40px;
+  font-family: Merriweather, Georgia, 'Times New Roman', serif;
+  font-size: 64px;
+  line-height: 1.1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.title .name { font-weight: 700; }
+.title .ts { font-weight: 400; }
+.legend {
+  position: absolute;
+  left: 48px;
+  top: 174px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 16px;
+  color: var(--ink);
+}
+.legend .label { font-weight: 700; margin-right: 4px; }
+.legend .item { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+.legend .dot {
+  width: 16px; height: 16px; border-radius: 50%; flex: 0 0 16px;
+}
+.node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+  padding: 12px 16px;
+}
+.node.square { border-radius: 0; }
+.node.rounded { border-radius: 16px; }
+.node.chevron {
+  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+  padding-right: 28px;
+}
+.node.ellipse { border-radius: 50%; padding: 8px; }
+.node.note {
+  background: transparent;
+  border: 2px dashed var(--note);
+}
+.node.diamond { padding: 0; background: transparent; }
+.diamond-bg {
+  position: absolute;
+  inset: 18% 12%;
+  transform: rotate(45deg);
+  border-radius: 4px;
+}
+.diamond-label {
+  position: relative;
+  z-index: 1;
+  width: 70%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+svg.connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div class="diagram">
+  <div class="title"><span class="name">Cartographer Mapping Loop Flow</span> <span class="ts">(10.02.2026)</span></div>
+  <div class="legend">
+    <span class="label">Entity:</span>
+    <span class="item"><span class="dot" style="background:var(--human)"></span>Human</span>
+    <span class="item"><span class="dot" style="background:var(--ai)"></span>AI Model</span>
+    <span class="item"><span class="dot" style="background:var(--system)"></span>Deterministic System</span>
+  </div>
+  <svg class="connectors" width="1457" height="1402">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3"
+              orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L8,3 L0,6 Z" fill="#757575"/>
+      </marker>
+    </defs>
+    <line x1="254.0" y1="374.0" x2="306.0" y2="374.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="498.0" y1="374.0" x2="550.0" y2="374.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="402.0" y1="466.0" x2="402.0" y2="518.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="504.0,590.0 646.0,590.0 646.0,466.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="742.0" y1="374.0" x2="794.0" y2="374.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="742.0,374.0 760.0,374.0 760.0,570.0 794.0,570.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="742.0,374.0 760.0,374.0 760.0,766.0 794.0,766.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="959.0" y1="374.0" x2="1011.0" y2="374.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="959.0,570.0 987.0,570.0 987.0,374.0 1011.0,374.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="959.0,766.0 987.0,766.0 987.0,374.0 1011.0,374.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="1149.0" y1="374.0" x2="1201.0" y2="374.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="1080.0" y1="446.0" x2="1075.0" y2="694.0" stroke="#757575" stroke-width="2" stroke-dasharray="8 5"/><line x1="1297.0" y1="466.0" x2="1297.0" y2="518.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="1393.0,374.0 1421.0,374.0 1421.0,928.0 126.0,928.0 126.0,998.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="1297.0,662.0 1297.0,928.0 126.0,928.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="204.0" y1="1070.0" x2="256.0" y2="1070.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="448.0" y1="1070.0" x2="500.0" y2="1070.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="448.0,1070.0 466.0,1070.0 466.0,1266.0 500.0,1266.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><line x1="683.0" y1="1070.0" x2="735.0" y2="1070.0" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/><polyline points="683.0,1266.0 711.0,1266.0 711.0,1070.0 735.0,1070.0" fill="none" stroke="#757575" stroke-width="2" marker-end="url(#arrow)"/>
+  </svg>
+  <div class="node chevron" style="left:48.0px;top:302.0px;width:206.0px;height:144.0px;background:#C2E5FF;">Invoke<br>Cartographer</div><div class="node diamond" style="left:306.0px;top:282.0px;width:192.0px;height:184.0px;"><div class="diamond-bg" style="background:#DCCCFF;"></div><div class="diamond-label">Intent<br>confirmed?</div></div><div class="node rounded" style="left:300.0px;top:518.0px;width:204.0px;height:144.0px;background:#C2E5FF;">Answer Target,<br>Source, Render</div><div class="node diamond" style="left:550.0px;top:282.0px;width:192.0px;height:184.0px;"><div class="diamond-bg" style="background:#DCCCFF;"></div><div class="diamond-label">Survey via?</div></div><div class="node square" style="left:794.0px;top:302.0px;width:165.0px;height:144.0px;background:#DCCCFF;">Survey<br>codebase</div><div class="node square" style="left:794.0px;top:498.0px;width:165.0px;height:144.0px;background:#DCCCFF;">Drive live<br>product</div><div class="node square" style="left:794.0px;top:694.0px;width:165.0px;height:144.0px;background:#DCCCFF;">Read<br>documentation</div><div class="node square" style="left:1011.0px;top:302.0px;width:138.0px;height:144.0px;background:#DCCCFF;">Synthesize<br>flow model</div><div class="node diamond" style="left:1201.0px;top:282.0px;width:192.0px;height:184.0px;"><div class="diamond-bg" style="background:#DCCCFF;"></div><div class="diamond-label">Over ~15<br>nodes?</div></div><div class="node square" style="left:1223.5px;top:518.0px;width:147.0px;height:144.0px;background:#DCCCFF;">Collapse<br>linear runs</div><div class="node square" style="left:48.0px;top:998.0px;width:156.0px;height:144.0px;background:#DCCCFF;">Name Product<br>+ Flow Type</div><div class="node diamond" style="left:256.0px;top:978.0px;width:192.0px;height:184.0px;"><div class="diamond-bg" style="background:#DCCCFF;"></div><div class="diamond-label">Where to<br>render?</div></div><div class="node square" style="left:500.0px;top:998.0px;width:183.0px;height:144.0px;background:#DCCCFF;">Render via<br>use_figma</div><div class="node square" style="left:500.0px;top:1194.0px;width:183.0px;height:144.0px;background:#D9D9D9;">Write self-<br>contained .html</div><div class="node ellipse" style="left:735.0px;top:1019.0px;width:102.0px;height:102.0px;background:#CDF4D3;">Map<br>delivered</div><div class="node note" style="left:991.0px;top:694.0px;width:168.0px;height:112.0px;">color = WHO<br>shape = WHAT</div>
+</div>
+</body>
+</html>
